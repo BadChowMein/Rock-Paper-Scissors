@@ -8,7 +8,14 @@
 </head>
 <body>
     <script>
+
+//1. Generate randomised computer string using math floor.
+
         let randomNumber = Math.floor(Math.random()*100) +1;
+
+//2. Prompt user rock paper scissors
+
+        
         
         function computerPlay() {
             if(randomNumber < 33) {
@@ -23,7 +30,7 @@
         }
 
         function playRound(playerSelection,computerSelection) {
-            if(playerSelection ===computerSelection) {
+            if(playerSelection === computerSelection) {
                 console.log("Its a draw!")
             }
                 else {
@@ -52,7 +59,7 @@
 
         }
 
-        const playerSelection = "Rock"
+        const playerSelection = prompt("Rock, Paper, or Scissors")
         const computerSelection = computerPlay()
 
         console.log(playRound)

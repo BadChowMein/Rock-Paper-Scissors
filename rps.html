@@ -11,60 +11,92 @@
         //1. Generate randomised number between 1 and 100, use this to return
         //   either Rock Paper or Scissors in a string.
 
-        let randomNumber = Math.floor(Math.random()*100) +1;
-
-        function computerPlay() {
-            if(randomNumber < 33) {
-                return ("Rock")
-            }
-            else if(randomNumber > 66) {
-                return ("Paper")
-            }
-            else {
-                return ("Scissors")
-            }
-        }
 
         //2. Establish player choice and computer choice
 
-        const playerSelection = prompt("Rock, Paper, or Scissors")
-        const computerSelection = computerPlay()
-
-        console.log(playerSelection)
-        console.log(computerSelection)
+      
         //3. Compare player selection with computer selection using logical operators.
         //   Use if else to return the result of each matchup, including draws
         //   Encapsulate the above in function 'playRound'
 
-        function playRound(playerSelection,computerSelection) { 
+        function playRound(playerSelection,computerSelection,playerScore,computerScore) { 
             if (playerSelection == "Rock" && computerSelection == "Paper") {
                 return("You lose! Paper beats Rock");
+                return computerScore++;
                 }
             else if (playerSelection == "Rock" && computerSelection == "Scissors") {
-                return("You win! Rock beats Paper");
+                return("You win! Rock beats Scissors");
+                return playerScore++;
                 }   
             else if (playerSelection == "Paper" && computerSelection == "Scissors") {
                 return("You lose! Scissors beat Paper");
+                return computerScore++;
                 }
             else if (playerSelection == "Paper" && computerSelection == "Rock") {
                 return("You win! Paper beats Rock");
+                return playerScore++;
                 }
             else if (playerSelection == "Scissors" && computerSelection == "Rock") {
                 return("You lose! Rock beats Scissors");
+                return computerScore++;
                 }
             else if (playerSelection == "Scissors" && computerSelection == "Paper") {
                 return("You win! Scissors beats Paper");
+                return playerScore++;
                 }
             else if (playerSelection == computerSelection) {
-                return("Its a draw")
+                return("Its a draw! You both picked" + " " + playerSelection)
             }
+            console.log(playerScore,computerScore)
         }
 
-        console.log(playRound(playerSelection, computerSelection))
+        function displayResult(playerScore,computerScore) {
+                if(playerScore > computerScore) {
+                    alert("You win! " + playerScore + " to" + computerScore)
+                }
+                else {
+                    alert("You lose! " + computerScore + " to" + playerScore)
+                }
+            }
 
-        //4. Write new function called 'game' which plays 5 rounds and keeps score. 
-        //   Report win/lose.
+        //4. Write new function called 'game' which plays 5 rounds.
+        //   Keep score. 
+        //   Display score, report win/lose.
 
+        function game() {
+            for (var round = 1; round < 6; round ++) {
+
+                let randomNumber = Math.floor(Math.random()*100) +1;
+
+                function computerPlay() {
+                    if(randomNumber < 33) {
+                        return ("Rock")
+                    }
+                    else if(randomNumber > 66) {
+                        return ("Paper")
+                    }
+                    else {
+                        return ("Scissors")
+                    }
+                }
+
+            const playerSelection = prompt("Rock, Paper, or Scissors")
+            const computerSelection = computerPlay()
+            var playerScore = 0
+            var computerScore = 0
+
+            console.log("Round" + " " + round)
+            console.log(playerSelection)
+            console.log(computerSelection)
+
+            if(round == 5) {
+                displayResult
+            } 
+
+            console.log(playRound(playerSelection, computerSelection))
+            }
+
+        }
 
     </script>
 </body>

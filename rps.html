@@ -8,41 +8,36 @@
 </head>
 <body>
     <script>
-        //1. Generate randomised number between 1 and 100, use this to return
-        //   either Rock Paper or Scissors in a string.
+        //Scores
+        let playerScore = 0
+        let computerScore = 0
 
-
-        //2. Establish player choice and computer choice
-
-      
-        //3. Compare player selection with computer selection using logical operators.
-        //   Use if else to return the result of each matchup, including draws
-        //   Encapsulate the above in function 'playRound'
-
+        //Functions
+        //playRound, compares playerSelection to computerSelection, returns result, and increments score by 1
         function playRound(playerSelection,computerSelection,playerScore,computerScore) { 
             if (playerSelection == "Rock" && computerSelection == "Paper") {
                 return("You lose! Paper beats Rock");
-                return computerScore++;
+                ++computerScore;
                 }
             else if (playerSelection == "Rock" && computerSelection == "Scissors") {
                 return("You win! Rock beats Scissors");
-                return playerScore++;
+                ++playerScore;
                 }   
             else if (playerSelection == "Paper" && computerSelection == "Scissors") {
                 return("You lose! Scissors beat Paper");
-                return computerScore++;
+                ++computerScore;
                 }
             else if (playerSelection == "Paper" && computerSelection == "Rock") {
                 return("You win! Paper beats Rock");
-                return playerScore++;
+                ++playerScore;
                 }
             else if (playerSelection == "Scissors" && computerSelection == "Rock") {
                 return("You lose! Rock beats Scissors");
-                return computerScore++;
+                ++computerScore;
                 }
             else if (playerSelection == "Scissors" && computerSelection == "Paper") {
                 return("You win! Scissors beats Paper");
-                return playerScore++;
+                ++playerScore;
                 }
             else if (playerSelection == computerSelection) {
                 return("Its a draw! You both picked" + " " + playerSelection)
@@ -50,24 +45,30 @@
             console.log(playerScore,computerScore)
         }
 
+        //displayResult, compares playerScore to computerScore, displays game winner. 
         function displayResult(playerScore,computerScore) {
                 if(playerScore > computerScore) {
                     alert("You win! " + playerScore + " to" + computerScore)
                 }
-                else {
+                else if (playerScore < computerScore) {
                     alert("You lose! " + computerScore + " to" + playerScore)
+                }
+                else if (playerScore == computerScore) {
+                    alert("Its a draw! " + computerScore + " to" + playerScore)
+                }
+                else {
+                    alert("Something went wrong...")
                 }
             }
 
-        //4. Write new function called 'game' which plays 5 rounds.
-        //   Keep score. 
-        //   Display score, report win/lose.
 
+        //Plays 5 rounds
         function game() {
             for (var round = 1; round < 6; round ++) {
 
                 let randomNumber = Math.floor(Math.random()*100) +1;
 
+                //Uses random number to determine computerSelection
                 function computerPlay() {
                     if(randomNumber < 33) {
                         return ("Rock")
@@ -80,24 +81,26 @@
                     }
                 }
 
+            //Player choice and Computer choice
             const playerSelection = prompt("Rock, Paper, or Scissors")
             const computerSelection = computerPlay()
-            var playerScore = 0
-            var computerScore = 0
 
+            //Displays round number, playerSelection, and computerSelection
             console.log("Round" + " " + round)
             console.log(playerSelection)
             console.log(computerSelection)
 
+            //Displays winner when 5 rounds are over
             if(round == 5) {
-                displayResult
+                displayResult()
             } 
 
-            console.log(playRound(playerSelection, computerSelection))
+            console.log(playRound(playerSelection, computerSelection, playerScore, computerScore))
             }
 
         }
 
+    game()
     </script>
 </body>
 </html>

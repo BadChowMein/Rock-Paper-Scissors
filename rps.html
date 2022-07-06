@@ -9,52 +9,67 @@
 <body>
     <script>
         //Scores
-        let playerScore = 0
-        let computerScore = 0
 
         //Functions
         //playRound, compares playerSelection to computerSelection, returns result, and increments score by 1
         function playRound(playerSelection,computerSelection,playerScore,computerScore) { 
             if (playerSelection == "Rock" && computerSelection == "Paper") {
                 return("You lose! Paper beats Rock");
-                ++computerScore;
+                return computerPoint();
+                console.log(playerScore,computerScore);
                 }
             else if (playerSelection == "Rock" && computerSelection == "Scissors") {
                 return("You win! Rock beats Scissors");
-                ++playerScore;
+                return playerPoint();
+                console.log(playerScore,computerScore);
                 }   
             else if (playerSelection == "Paper" && computerSelection == "Scissors") {
                 return("You lose! Scissors beat Paper");
-                ++computerScore;
+                return computerPoint();
+                console.log(playerScore,computerScore);
                 }
             else if (playerSelection == "Paper" && computerSelection == "Rock") {
                 return("You win! Paper beats Rock");
-                ++playerScore;
+                return playerPoint();
+                console.log(playerScore,computerScore);
                 }
             else if (playerSelection == "Scissors" && computerSelection == "Rock") {
                 return("You lose! Rock beats Scissors");
-                ++computerScore;
+                return computerPoint();
+                console.log(playerScore,computerScore);
                 }
             else if (playerSelection == "Scissors" && computerSelection == "Paper") {
                 return("You win! Scissors beats Paper");
-                ++playerScore;
+                return playerPoint();
+                console.log(playerScore,computerScore);
                 }
             else if (playerSelection == computerSelection) {
-                return("Its a draw! You both picked" + " " + playerSelection)
+                return("Its a draw! You both picked" + " " + playerSelection);
+                console.log(playerScore,computerScore);
             }
-            console.log(playerScore,computerScore)
+        
+        }
+        let playerScore = 0;
+        let computerScore = 0;
+
+        function playerPoint(playerScore) {
+            playerScore++;
+        }
+
+        function computerPoint(computerScore) {
+            computerScore++;
         }
 
         //displayResult, compares playerScore to computerScore, displays game winner. 
         function displayResult(playerScore,computerScore) {
                 if(playerScore > computerScore) {
-                    alert("You win! " + playerScore + " to" + computerScore)
+                    alert("You win! " + playerScore + " to " + computerScore)
                 }
                 else if (playerScore < computerScore) {
-                    alert("You lose! " + computerScore + " to" + playerScore)
+                    alert("You lose! " + computerScore + " to " + playerScore)
                 }
                 else if (playerScore == computerScore) {
-                    alert("Its a draw! " + computerScore + " to" + playerScore)
+                    alert("Its a draw! " + computerScore + " to " + playerScore)
                 }
                 else {
                     alert("Something went wrong...")
@@ -66,9 +81,9 @@
         function game() {
             for (var round = 1; round < 6; round ++) {
 
+            //Uses random number to determine computerSelection
                 let randomNumber = Math.floor(Math.random()*100) +1;
 
-                //Uses random number to determine computerSelection
                 function computerPlay() {
                     if(randomNumber < 33) {
                         return ("Rock")

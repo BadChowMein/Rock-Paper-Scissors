@@ -8,59 +8,27 @@
 </head>
 <body>
     <script>
-        //Scores
-
         //Functions
         //playRound, compares playerSelection to computerSelection, returns result, and increments score by 1
-        function playRound(playerSelection,computerSelection,playerScore,computerScore) { 
-            if (playerSelection == "Rock" && computerSelection == "Paper") {
-                return("You lose! Paper beats Rock");
-                return computerPoint();
-                console.log(playerScore,computerScore);
-                }
-            else if (playerSelection == "Rock" && computerSelection == "Scissors") {
-                return("You win! Rock beats Scissors");
-                return playerPoint();
-                console.log(playerScore,computerScore);
-                }   
-            else if (playerSelection == "Paper" && computerSelection == "Scissors") {
-                return("You lose! Scissors beat Paper");
-                return computerPoint();
-                console.log(playerScore,computerScore);
-                }
-            else if (playerSelection == "Paper" && computerSelection == "Rock") {
-                return("You win! Paper beats Rock");
-                return playerPoint();
-                console.log(playerScore,computerScore);
-                }
-            else if (playerSelection == "Scissors" && computerSelection == "Rock") {
-                return("You lose! Rock beats Scissors");
-                return computerPoint();
-                console.log(playerScore,computerScore);
-                }
-            else if (playerSelection == "Scissors" && computerSelection == "Paper") {
-                return("You win! Scissors beats Paper");
-                return playerPoint();
-                console.log(playerScore,computerScore);
-                }
-            else if (playerSelection == computerSelection) {
-                return("Its a draw! You both picked" + " " + playerSelection);
-                console.log(playerScore,computerScore);
+    
+        function playRound(playerSelection,computerSelection) {
+            if (playerSelection == computerSelection) {
+                return "tie"
             }
-        
+            else if (playerSelection == "rock" && computerSelection == "paper" ||
+                playerSelection == "paper" && computerSelection == "scissors" ||
+                playerSelection == "scissors" && computerSelection == "rock") {
+                    return "lose"
+                }
+            else if (playerSelection == "rock" && computerSelection == "scissors" ||
+                playerSelection == "paper" && computerSelection == "rock" ||
+                playerSelection == "scissors" && computerSelection == "paper") {
+                    return "win"
+                }
         }
-        let playerScore = 0;
-        let computerScore = 0;
-
-        function playerPoint(playerScore) {
-            playerScore++;
-        }
-
-        function computerPoint(computerScore) {
-            computerScore++;
-        }
-
+       
         //displayResult, compares playerScore to computerScore, displays game winner. 
+
         function displayResult(playerScore,computerScore) {
                 if(playerScore > computerScore) {
                     alert("You win! " + playerScore + " to " + computerScore)
@@ -75,42 +43,60 @@
                     alert("Something went wrong...")
                 }
             }
+       
 
+        //Determine computerSelection
+        function computerPlay() {
+            const compChoices = ["rock", "paper", "scissors"];
+            let computerSelection = Math.floor(Math.random() * compChoices.length);
+            return compChoices[computerSelection];
+        }
 
         //Plays 5 rounds
         function game() {
+
+            //Scores
+            let playerScore = 0;
+            let computerScore = 0;
+
             for (var round = 1; round < 6; round ++) {
+            
+                //Player choice and Computer choice
+                const playerSelection = prompt("Rock, Paper, or Scissors").toLowerCase();
+                const computerSelection = computerPlay()
 
-            //Uses random number to determine computerSelection
-                let randomNumber = Math.floor(Math.random()*100) +1;
+                //Displays round number, playerSelection, and computerSelection
+                console.log("Round" + " " + round)
+                console.log(playerSelection)
+                console.log(computerSelection)
+                console.log(playerScore,computerScore);
 
-                function computerPlay() {
-                    if(randomNumber < 33) {
-                        return ("Rock")
-                    }
-                    else if(randomNumber > 66) {
-                        return ("Paper")
-                    }
-                    else {
-                        return ("Scissors")
-                    }
+                if (playRound(playerSelection, computerSelection) === "tie") {
+                    console.log("Its a tie!");
+                    round--
+                }
+                else if (playRound(playerSelection, computerSelection) === "lose") {
+                    console.log("You lose!");
+                    computerScore++;
+                }
+                else if (playRound(playerSelection, computerSelection) === "win") {
+                    console.log("You win!");
+                    playerScore++;
+                }
+                else {
+                    console.log("Incorrect input")
                 }
 
-            //Player choice and Computer choice
-            const playerSelection = prompt("Rock, Paper, or Scissors")
-            const computerSelection = computerPlay()
+                //Displays winner when 5 rounds are over
+                if(round == 5 && playerScore >= 3) {
+                    alert(`You won the game! ${playerscore}` + " to " + `${computerScore}` + "Congrats")
+                }
+                else if ( round == 5 && playerScore == computerScore) {
+                    alert(`Its a draw! ${playerScore}` + " to " + `${computerScore}`)
+                } 
+                else if (round == 5 && computerScore > 3)
+                    alert(`You lost the game ${computerScore}` + " to " + `${playerScore}` + " , get fucked, noob")
 
-            //Displays round number, playerSelection, and computerSelection
-            console.log("Round" + " " + round)
-            console.log(playerSelection)
-            console.log(computerSelection)
-
-            //Displays winner when 5 rounds are over
-            if(round == 5) {
-                displayResult()
-            } 
-
-            console.log(playRound(playerSelection, computerSelection, playerScore, computerScore))
             }
 
         }
